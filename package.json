@@ -1,7 +1,7 @@
 {
   "name": "react-shop",
   "version": "0.2.0",
-  "homepage": ".",
+  "homepage": "http://.",
   "private": true,
   "devDependencies": {
     "gh-pages": "^2.2.0",
@@ -37,5 +37,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "description": "example of shopping cart implemented in react.js and redux.js",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshtiwar9/ReactShoppingCart.git"
+  },
+  "author": "Harsh Tiwar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harshtiwar9/ReactShoppingCart/issues"
   }
 }
