@@ -3,7 +3,7 @@ import CartItem from './CartItem';
 import './Cart.css';
 import {useSelector} from 'react-redux'
 
-const Cart = () => {
+const Cart = ({removeFromCart}) => {
 
 
     const items = useSelector(state => state.productInCart);
@@ -19,7 +19,7 @@ const Cart = () => {
                         { items && items.length > 0 && (
                             <div className="cart__body">
                                 {items.map(item => (
-                                    <CartItem key={item.id} {...item} />
+                                    <CartItem key={item.id} {...item} removeFromCart={removeFromCart} />
                                 ))}
                             </div>
                         )}

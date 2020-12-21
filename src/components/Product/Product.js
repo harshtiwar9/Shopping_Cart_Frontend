@@ -60,7 +60,8 @@ function removeItemFromCart(){
                             // onClick = { () => dispatch({'type': 'addItem', data : {name,price,currency}})}
                             onClick = { () => addProductToCart()}
                         >
-                            {isInCart ? 'Remove' : 'Add to cart'}
+                            {console.log(updatedCart.typeOf)}
+                            {updatedCart.find(e => e.productNameInCart === name) ? 'Remove' : 'Add to cart'}
                         </button>
                     </div>
                 </div>

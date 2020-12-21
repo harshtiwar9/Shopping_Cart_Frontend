@@ -20,6 +20,7 @@ function updateCart(state = defaultState, action) {
                 productInCart: newArray,
                 total: newCart.total
             }
+            break;
 
         case "removeItem":
 
@@ -33,6 +34,7 @@ function updateCart(state = defaultState, action) {
                 productInCart: newArray1,
                 total: newCart.total
             }
+            break;
 
         default:
             return newCart;
