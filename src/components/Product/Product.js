@@ -3,7 +3,8 @@ import { useSelector, useDispatch} from 'react-redux';
 
 function Product ({ name, price, currency, image }){
 
-let updatedCart = useSelector(state => state.productInCart);
+let updatedCart = useSelector(state => state);
+const check = Object.values(updatedCart.productInCart)
 // console.log(updatedCart);
 const dispatch = useDispatch();
 
@@ -55,13 +56,13 @@ function removeItemFromCart(){
                     <div className="product__price">{price} {currency}</div>
                     <div className="product__button-wrap">
                         <button
-                            className={isInCart ? 'btn btn-danger' : 'btn btn-primary'}
+                            className={check.find(e => {if(e.productNameInCart === name){ return true;}}) ? 'btn btn-danger' : 'btn btn-primary'}
                             // onClick = { () => console.log(`${name} is added to cart`)}
                             // onClick = { () => dispatch({'type': 'addItem', data : {name,price,currency}})}
                             onClick = { () => addProductToCart()}
                         >
-                            {console.log(updatedCart.typeOf)}
-                            {updatedCart.find(e => e.productNameInCart === name) ? 'Remove' : 'Add to cart'}
+                            {console.log("Here!")}
+                            {check.find(e => {if(e.productNameInCart === name){ return true;}}) ? 'Remove' : 'Add to cart'}
                         </button>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ const App = () => {
             currency : currency
         }
         dispatch({'type': 'removeItem', data : data})
-        console.log(data)
+        // console.log(data)
     }
 
     function checkConnection(){
