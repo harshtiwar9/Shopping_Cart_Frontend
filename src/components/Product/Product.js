@@ -13,7 +13,9 @@ let [isInCart,SetIsInCart] = useState(false);
 const addProductToCart = () =>{
 
     let data = {
+        id:id,
         productNameInCart : name,
+        stock : stock,
         price : price,
         currency : currency
     }
@@ -36,6 +38,7 @@ const addProductToCart = () =>{
 function removeItemFromCart(){
 
     let data = {
+        id:id,
         productNameInCart : name,
         price : price,
         currency : currency
