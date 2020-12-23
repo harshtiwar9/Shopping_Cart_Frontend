@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cart from './components/Cart/Cart';
 import ProductList from './components/ProductList/ProductList';
-import Product from './components/Product/Product'
-import data from './data/products';
 import { useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 
 const App = () => {
 
-    const productList = useSelector(state => state.productList);
     const dispatch = useDispatch();
     const dbUrl = "http://localhost:3001";
+    const [products, setProducts] = useState([]);
 
     function removeFromCart(name,price,currency){
         // Product.setIsInCart(false)
@@ -23,14 +21,16 @@ const App = () => {
         // console.log(data)
     }
 
-    function checkConnection(){
-        axios.get(dbUrl+"/readfile")
+    function getProducts(){
+        axios.get(dbUrl+"/getproducts")
         .then(function(response){
-            console.log(response.data)
+            dispatch({'type': 'setProducts', data : response.data})
+            setProducts(response.data);
+            // console.log(response.data)
         })
     }
 
-    useEffect(checkConnection,[]);
+    useEffect(getProducts,[]);
 
     return (
         <div className="container">
@@ -42,7 +42,7 @@ const App = () => {
             <div className="row">
                 <div className="col-md-8">
                     {/* <ProductList products={ productList }/> */}
-                    <ProductList/>
+                    <ProductList products={products} />
                 </div>
                 <div className="col-md-4">
                     <Cart removeFromCart={ removeFromCart} />

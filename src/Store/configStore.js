@@ -1,8 +1,8 @@
 import { createStore } from 'redux';
-import data from '../data/products';
+// import data from '../data/products';
 
 const defaultState = {
-    productList: data,
+    productList: [],
     productInCart: [],
     total: 0
 }
@@ -12,6 +12,15 @@ function updateCart(state = defaultState, action) {
     let newCart = Object.assign({}, state);
 
     switch (action.type) {
+
+        case "setProducts":
+            return {
+                productList: action.data,
+                productInCart: [],
+                total: 0
+            }
+            break;
+
         case "addItem":
             let newArray = [...newCart.productInCart, action.data];
             newCart.total += action.data.price;

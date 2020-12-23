@@ -14,7 +14,7 @@ const ProductList = ({ products }) => {
             <h3>Products</h3>
             <ul className="product-list">
               {/* {console.log({...productInCart})} */}
-              {productListState.map(product => (
+              {products.map(product => (
                   <li key={product.id} className="product-list__item">
                     <Product {...product} />
                   </li>

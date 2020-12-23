@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 
-function Product ({ name, price, currency, image }){
+function Product ({id, name, price, stock, currency, image }){
 
 let updatedCart = useSelector(state => state);
 const check = Object.values(updatedCart.productInCart)
@@ -35,7 +35,6 @@ const addProductToCart = () =>{
 
 function removeItemFromCart(){
 
-    console.log("Here")
     let data = {
         productNameInCart : name,
         price : price,
@@ -56,13 +55,23 @@ function removeItemFromCart(){
                     <div className="product__price">{price} {currency}</div>
                     <div className="product__button-wrap">
                         <button
-                            className={check.find(e => {if(e.productNameInCart === name){ return true;}}) ? 'btn btn-danger' : 'btn btn-primary'}
+                            className={
+                                stock === 0 ? 'btn btn-primary text-white' :
+                                check.find(e => {if(e.productNameInCart === name){ return true;}}) ? 'btn btn-danger' : 'btn btn-primary'
+                            }
+                            
+                            disabled={stock === 0 ? true : false}
+
                             // onClick = { () => console.log(`${name} is added to cart`)}
                             // onClick = { () => dispatch({'type': 'addItem', data : {name,price,currency}})}
                             onClick = { () => addProductToCart()}
                         >
-                            {console.log("Here!")}
-                            {check.find(e => {if(e.productNameInCart === name){ return true;}}) ? 'Remove' : 'Add to cart'}
+                            {/* {check.find(e => {if(e.productNameInCart === name){ return true;}}) ? 'Remove' : 'Add to cart'} */}
+                            {/* {console.log(stock+" : "+typeof(stock))} */}
+                            {
+                                stock === 0 ? 'Out of Stock' :
+                                check.find(e => {if(e.productNameInCart === name){ return true;}}) ? 'Remove' : 'Add to cart'
+                            }
                         </button>
                     </div>
                 </div>

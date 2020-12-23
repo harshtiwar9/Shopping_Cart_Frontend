@@ -10,3 +10,7 @@
     list-style: none;
     width: 32%;
 }
+
+button:disabled {
+    background-color: #726d6dbf;
+}
