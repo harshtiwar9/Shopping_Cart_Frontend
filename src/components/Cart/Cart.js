@@ -12,11 +12,6 @@ const Cart = ({removeFromCart}) => {
 
     function placeOrder(){
 
-        console.log({items})
-        console.log(typeof(items))
-        console.log(Object.values(items))
-
-        // axios.get(dbUrl+"/placeOrder?id="+id+"&updatedStock="+parseInt(stock-1))
         axios.post(dbUrl+"/placeOrder?items="+JSON.stringify(items))
         .then(function(response){
             // console.log(response.data)
