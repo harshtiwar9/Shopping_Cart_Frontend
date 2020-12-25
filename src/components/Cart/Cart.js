@@ -17,7 +17,7 @@ const Cart = ({removeFromCart}) => {
             // console.log(response.data)
             if(response.data === true){
                 alert("Order Placed");
-                window.location.href = "http://localhost:3002";
+                window.location.href = "http://localhost:3000";
             }else{
                 alert("Issue while placing Order!");
             }
@@ -34,7 +34,6 @@ const Cart = ({removeFromCart}) => {
             <div className="cart">
                 <div className="panel panel-default">
                     <div className="panel-body">
-                        {console.log(items)}
                         { items && items.length > 0 && (
                             <div className="cart__body">
                                 {items.map(item => (

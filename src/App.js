@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cart from './components/Cart/Cart';
 import ProductList from './components/ProductList/ProductList';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 const App = () => {
@@ -10,14 +10,30 @@ const App = () => {
     const dbUrl = "http://localhost:3001";
     const [products, setProducts] = useState([]);
 
-    function removeFromCart(name, price, currency) {
+    function removeFromCart(id,name,stock, price, currency) {
         // Product.setIsInCart(false)
+    
         let data = {
+            id: id,
             productNameInCart: name,
+            stock: stock,
             price: price,
             currency: currency
         }
-        dispatch({ 'type': 'removeItem', data: data })
+
+        axios.delete(dbUrl + "/removefromcart?id=" + data.id)
+            .then(function (response) {
+                // console.log(response.data)
+                if (response.data === true) {
+                    console.log("Data removed from Cart!")
+                    dispatch({ 'type': 'removeItem', data: data })
+                } else {
+                    console.log("Error while removing from Cart!")
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
         // console.log(data)
     }
 
@@ -30,11 +46,11 @@ const App = () => {
                     .then(function (response2) {
                         if (response2.data != null) {
                             // console.log(Object.keys(response2.data))
-                            let data = [];
+                            // console.log(response2.data)
                             for (let i = 0; i < response2.data.length; i++) {
-                                dispatch({ 'type': 'addItem', data: response2.data[i].items});
+                                dispatch({ 'type': 'addItem', data: response2.data[i]});
                             }
-                            console.log(data)
+                            // console.log(data)
                             // dispatch({ 'type': 'addItem', data: data })
                         }
                     })

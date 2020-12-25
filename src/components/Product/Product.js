@@ -22,7 +22,7 @@ function Product({ id, name, price, stock, currency, image }) {
             currency: currency
         }
 
-        if (!isInCart) {
+        if (!check.find(e => { if (e.productNameInCart === name) { return true; } })) {
 
             axios.post(dbUrl + "/insertToCart?items=" + JSON.stringify(data))
             .then(function (response) {
@@ -40,26 +40,26 @@ function Product({ id, name, price, stock, currency, image }) {
             })
         }
         else {
-            dispatch({ 'type': 'removeItem', data: data })
-            SetIsInCart(false)
+            
+            axios.delete(dbUrl + "/removefromcart?id=" + data.id)
+            .then(function (response) {
+                // console.log(response.data)
+                if (response.data === true) {
+                    console.log("Data removed from Cart!")
+                    dispatch({ 'type': 'removeItem', data: data })
+                    SetIsInCart(false)
+                } else {
+                    console.log("Error while removing from Cart!")
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
         }
 
         // console.log("isInCart:" +isInCart)
 
         // console.log(productNameInCart)
-    }
-
-    function removeItemFromCart() {
-
-        let data = {
-            id: id,
-            productNameInCart: name,
-            price: price,
-            currency: currency
-        }
-
-        dispatch({ 'type': 'removeItem', data: data })
-        SetIsInCart(false)
     }
 
     //
@@ -90,7 +90,5 @@ function Product({ id, name, price, stock, currency, image }) {
         </div>
     );
 }
-
-
 
 export default Product;

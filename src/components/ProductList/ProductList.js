@@ -1,13 +1,8 @@
 import React from 'react';
 import Product from '../Product/Product';
 import './ProductList.css';
-import { useState } from 'react';
-import { useSelector, useDispatch} from 'react-redux';
 
 const ProductList = ({ products }) => {
-  
-  const productListState = useSelector(state => state.productList);
-  const productInCart = useSelector(state => state.productInCart);
 
     return (
         <div>
@@ -23,6 +18,5 @@ const ProductList = ({ products }) => {
         </div>
     );
 }
-
 
 export default ProductList;
