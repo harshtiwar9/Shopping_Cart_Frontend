@@ -21,7 +21,7 @@ const App = () => {
             currency: currency
         }
 
-        axios.delete(dbUrl + "/removefromcart?id=" + data.id)
+        axios.delete(dbUrl + "/cart/"+data.id)
             .then(function (response) {
                 // console.log(response.data)
                 if (response.data === true) {
@@ -38,11 +38,11 @@ const App = () => {
     }
 
     function getProducts() {
-        axios.get(dbUrl + "?request=products")
+        axios.get(dbUrl + "/products")
             .then(function (response) {
                 dispatch({ 'type': 'setProducts', data: response.data })
                 setProducts(response.data);
-                axios.get(dbUrl + "?request=cart")
+                axios.get(dbUrl + "/cart")
                     .then(function (response2) {
                         if (response2.data != null) {
                             // console.log(Object.keys(response2.data))

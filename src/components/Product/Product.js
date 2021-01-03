@@ -24,37 +24,37 @@ function Product({ id, name, price, stock, currency, image }) {
 
         if (!check.find(e => { if (e.productNameInCart === name) { return true; } })) {
 
-            axios.post(dbUrl + "/insertToCart?items=" + JSON.stringify(data))
-            .then(function (response) {
-                // console.log(response.data)
-                if (response.data === true) {
-                    console.log("Data Inserted to Cart!")
-                    dispatch({ 'type': 'addItem', data: data })
-                    SetIsInCart(true)
-                } else {
-                    console.log("Error while adding to Cart!")
-                }
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
+            axios.post(dbUrl + "/cart", data)
+                .then(function (response) {
+                    // console.log(response.data)
+                    if (response.data === true) {
+                        console.log("Data Inserted to Cart!")
+                        dispatch({ 'type': 'addItem', data: data })
+                        SetIsInCart(true)
+                    } else {
+                        console.log("Error while adding to Cart!")
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
         }
         else {
-            
-            axios.delete(dbUrl + "/removefromcart?id=" + data.id)
-            .then(function (response) {
-                // console.log(response.data)
-                if (response.data === true) {
-                    console.log("Data removed from Cart!")
-                    dispatch({ 'type': 'removeItem', data: data })
-                    SetIsInCart(false)
-                } else {
-                    console.log("Error while removing from Cart!")
-                }
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
+
+            axios.delete(dbUrl + "/cart/"+data.id)
+                .then(function (response) {
+                    // console.log(response.data)
+                    if (response.data === true) {
+                        console.log("Data removed from Cart!")
+                        dispatch({ 'type': 'removeItem', data: data })
+                        SetIsInCart(false)
+                    } else {
+                        console.log("Error while removing from Cart!")
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
         }
 
         // console.log("isInCart:" +isInCart)
