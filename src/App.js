@@ -77,9 +77,11 @@ const App = () => {
                 </div>
                 <div className="col-4 col-md-4">
                     <br />
-                    <Button variant="primary" onClick={handleShow}>
+                    <a href="#!" onClick={handleShow}>Login</a>
+                    <a href="#!" onClick={handleShow}>/Signup</a>
+                    {/* <Button variant="primary" onClick={handleShow}>
                         Login
-                    </Button>
+                    </Button> */}
 
                     <Modal show={show} onHide={handleClose} animation={false}>
                         <Modal.Header>
@@ -98,7 +100,7 @@ const App = () => {
                                 </div>
                                 <div className="mb-3 form-check">
                                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                                    <label className="form-check-label" for="exampleCheck1">Remember Me</label>
+                                    &nbsp;<label className="form-check-label" for="exampleCheck1">Remember Me</label>
                                 </div>
                             </Modal.Body>
                             <Modal.Footer>
